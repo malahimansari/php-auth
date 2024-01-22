@@ -16,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = mysqli_query($conn, $sql);
         if ($result && $row = mysqli_fetch_assoc($result)) {
             if (password_verify($password, $row['password'])) {
-                echo 'Login successful. Welcome, ' . $row['full_name'] . '!';
+                $_SESSION['email'] = $row['email'];
+                header("location:index.php");
             } else {
                 echo "Incorrect Password";
             }
